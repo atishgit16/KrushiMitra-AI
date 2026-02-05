@@ -1,0 +1,159 @@
+
+
+.market-prices {
+  padding: 40px 0;
+  min-height: calc(100vh - 70px);
+}
+
+.market-filters {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 250px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  font-size: 1.2rem;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 12px 16px 12px 48px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.crop-filter {
+  padding: 12px 20px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: var(--white);
+  cursor: pointer;
+}
+
+.crop-filter:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.prices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.price-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  border-left: 4px solid var(--primary-color);
+}
+
+.price-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.price-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.price-header h3 {
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.trend {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.trend.up {
+  background: #d4edda;
+  color: #2ecc71;
+}
+
+.trend.down {
+  background: #f8d7da;
+  color: #e74c3c;
+}
+
+.price-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 16px;
+}
+
+.price-unit {
+  font-size: 1rem;
+  color: var(--text-light);
+  font-weight: 400;
+}
+
+.price-footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.market-insights-section {
+  margin-top: 32px;
+}
+
+.insights-list {
+  list-style: none;
+  padding: 0;
+}
+
+.insights-list li {
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  background: var(--background);
+  border-left: 3px solid var(--primary-color);
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .market-filters {
+    flex-direction: column;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .prices-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
