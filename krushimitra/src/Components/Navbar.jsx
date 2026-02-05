@@ -43,12 +43,11 @@ const Navbar = ({ isAuthenticated, user, onLogout, language, setLanguage }) => {
     <nav className="navbar">
       <div className="container navbar-container">
         <Link to="/" className="navbar-brand" onClick={closeAllMenus}>
-          <span className="brand-icon">🌾</span>
-          <span className="brand-text">KrushiMitra</span>
+          <img src="/krushiMitra_logo.png" alt="KrushiMitra AI" className="brand-logo" />
         </Link>
 
-        <button 
-          className={`mobile-menu-toggle ${mobileMenuOpen ? 'active' : ''}`} 
+        <button
+          className={`mobile-menu-toggle ${mobileMenuOpen ? 'active' : ''}`}
           onClick={toggleMobileMenu}
           aria-label="Toggle menu"
         >
@@ -57,50 +56,50 @@ const Navbar = ({ isAuthenticated, user, onLogout, language, setLanguage }) => {
           <span></span>
         </button>
 
-        <div 
-          className={`navbar-menu ${mobileMenuOpen ? 'active' : ''}`} 
+        <div
+          className={`navbar-menu ${mobileMenuOpen ? 'active' : ''}`}
           ref={mobileMenuRef}
         >
           {isAuthenticated ? (
             <>
-              <Link 
-                to="/dashboard" 
+              <Link
+                to="/dashboard"
                 className={`nav-link ${isActive('/dashboard') ? 'active' : ''}`}
                 onClick={closeAllMenus}
               >
                 <span>📊</span> Dashboard
               </Link>
-              <Link 
-                to="/crop-recommendation" 
+              <Link
+                to="/crop-recommendation"
                 className={`nav-link ${isActive('/crop-recommendation') ? 'active' : ''}`}
                 onClick={closeAllMenus}
               >
                 <span>🌱</span> Crop Advice
               </Link>
-              <Link 
-                to="/market-prices" 
+              <Link
+                to="/market-prices"
                 className={`nav-link ${isActive('/market-prices') ? 'active' : ''}`}
                 onClick={closeAllMenus}
               >
                 <span>📈</span> Market Prices
               </Link>
-              <Link 
-                to="/weather" 
+              <Link
+                to="/weather"
                 className={`nav-link ${isActive('/weather') ? 'active' : ''}`}
                 onClick={closeAllMenus}
               >
                 <span>🌤️</span> Weather
               </Link>
-              <Link 
-                to="/chatbot" 
+              <Link
+                to="/chatbot"
                 className={`nav-link ${isActive('/chatbot') ? 'active' : ''}`}
                 onClick={closeAllMenus}
               >
                 <span>🤖</span> AI Assistant
               </Link>
-              
+
               <div className="navbar-right">
-                <select 
+                <select
                   className="language-selector"
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
@@ -115,8 +114,8 @@ const Navbar = ({ isAuthenticated, user, onLogout, language, setLanguage }) => {
                 </select>
 
                 <div className="user-menu" ref={userMenuRef}>
-                  <button 
-                    className="user-button" 
+                  <button
+                    className="user-button"
                     onClick={toggleUserMenu}
                     aria-label="User menu"
                   >
@@ -141,7 +140,7 @@ const Navbar = ({ isAuthenticated, user, onLogout, language, setLanguage }) => {
             <>
               {/* Removed Home button - only logo remains for home navigation */}
               <div className="navbar-right">
-            
+
                 <Link to="/register" className="btn btn-primary btn-sm" onClick={closeAllMenus}>
                   Get Started
                 </Link>

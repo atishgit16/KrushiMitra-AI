@@ -22,6 +22,16 @@
   color: var(--white);
 }
 
+.footer-logo-wrapper {
+  margin-bottom: 15px;
+}
+
+.footer-logo {
+  height: 70px;
+  width: auto;
+  object-fit: contain;
+}
+
 .footer-subtitle {
   font-size: 1.1rem;
   margin-bottom: 16px;
@@ -30,7 +40,7 @@
 }
 
 .footer-description {
-  color: rgba(255, 255, 255, 0.8);
+  color: #b0bec5;
   line-height: 1.6;
   margin-bottom: 20px;
 }
@@ -51,11 +61,18 @@
   text-decoration: none;
   font-size: 1.2rem;
   transition: all 0.3s ease;
+  color: white;
 }
 
 .footer-social a:hover {
-  background: var(--primary-color);
+  background: var(--primary-light);
   transform: translateY(-3px);
+  color: white;
+}
+
+.footer-social svg {
+  width: 20px;
+  height: 20px;
 }
 
 .footer-links {
