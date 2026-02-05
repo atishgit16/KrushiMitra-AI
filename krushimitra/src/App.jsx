@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import './App.css';
 
 // Components
@@ -48,84 +49,84 @@ function App() {
     setUser(null);
   };
 
- return (
-  <div className="App">
+  return (
+    <div className="App">
+      <Toaster position="top-center" reverseOrder={false} />
+      <Navbar
+        isAuthenticated={isAuthenticated}
+        user={user}
+        onLogout={handleLogout}
+        language={language}
+        setLanguage={setLanguage}
+      />
+      <main className="main-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/login"
+            element={
+              isAuthenticated ? <Navigate to="/dashboard" /> : <Login onLogin={handleLogin} />
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              isAuthenticated ? <Navigate to="/dashboard" /> : <Register onLogin={handleLogin} />
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              isAuthenticated ? <Dashboard user={user} /> : <Navigate to="/login" />
+            }
+          />
+          <Route
+            path="/crop-recommendation"
+            element={
+              isAuthenticated ? <CropRecommendation user={user} /> : <Navigate to="/login" />
+            }
+          />
+          <Route
+            path="/irrigation-schedule"
+            element={
+              isAuthenticated ? <IrrigationSchedule user={user} /> : <Navigate to="/login" />
+            }
+          />
+          <Route
+            path="/market-prices"
+            element={
+              isAuthenticated ? <MarketPrices user={user} /> : <Navigate to="/login" />
+            }
+          />
+          <Route
+            path="/weather"
+            element={
+              isAuthenticated ? <WeatherForecast user={user} /> : <Navigate to="/login" />
+            }
+          />
+          <Route
+            path="/chatbot"
+            element={
+              isAuthenticated ? <ChatBot user={user} language={language} /> : <Navigate to="/login" />
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              isAuthenticated ? <Profile user={user} setUser={setUser} /> : <Navigate to="/login" />
+            }
+          />
+          <Route
+            path="/feedback-history"
+            element={
+              isAuthenticated ? <FeedbackHistory user={user} /> : <Navigate to="/login" />
+            }
+          />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
 
-        <Navbar 
-          isAuthenticated={isAuthenticated} 
-          user={user} 
-          onLogout={handleLogout}
-          language={language}
-          setLanguage={setLanguage}
-        />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route 
-              path="/login" 
-              element={
-                isAuthenticated ? <Navigate to="/dashboard" /> : <Login onLogin={handleLogin} />
-              } 
-            />
-            <Route 
-              path="/register" 
-              element={
-                isAuthenticated ? <Navigate to="/dashboard" /> : <Register onLogin={handleLogin} />
-              } 
-            />
-            <Route 
-              path="/dashboard" 
-              element={
-                isAuthenticated ? <Dashboard user={user} /> : <Navigate to="/login" />
-              } 
-            />
-            <Route 
-              path="/crop-recommendation" 
-              element={
-                isAuthenticated ? <CropRecommendation user={user} /> : <Navigate to="/login" />
-              } 
-            />
-            <Route 
-              path="/irrigation-schedule" 
-              element={
-                isAuthenticated ? <IrrigationSchedule user={user} /> : <Navigate to="/login" />
-              } 
-            />
-            <Route 
-              path="/market-prices" 
-              element={
-                isAuthenticated ? <MarketPrices user={user} /> : <Navigate to="/login" />
-              } 
-            />
-            <Route 
-              path="/weather" 
-              element={
-                isAuthenticated ? <WeatherForecast user={user} /> : <Navigate to="/login" />
-              } 
-            />
-            <Route 
-              path="/chatbot" 
-              element={
-                isAuthenticated ? <ChatBot user={user} language={language} /> : <Navigate to="/login" />
-              } 
-            />
-            <Route 
-              path="/profile" 
-              element={
-                isAuthenticated ? <Profile user={user} setUser={setUser} /> : <Navigate to="/login" />
-              } 
-            />
-            <Route 
-              path="/feedback-history" 
-              element={
-                isAuthenticated ? <FeedbackHistory user={user} /> : <Navigate to="/login" />
-              } 
-            />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-  
   );
 }
 

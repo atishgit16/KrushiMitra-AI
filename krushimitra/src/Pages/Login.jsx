@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import './Auth.css';
 
 const Login = ({ onLogin }) => {
@@ -8,7 +9,6 @@ const Login = ({ onLogin }) => {
     password: ''
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setFormData({
@@ -19,8 +19,14 @@ const Login = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Manual Validation
+    if (!formData.phone || !formData.password) {
+      toast.error('Please fill in all required fields');
+      return;
+    }
+
     setLoading(true);
-    setError('');
 
     try {
       // API call to backend
@@ -35,12 +41,27 @@ const Login = ({ onLogin }) => {
       const data = await response.json();
 
       if (response.ok) {
+        toast.success('Successfully logged in!', {
+          style: {
+            background: '#333',
+            color: '#fff',
+          },
+          iconTheme: {
+            primary: '#4CAF50',
+            secondary: '#FFFAEE',
+          },
+        });
         onLogin(data.user, data.token);
       } else {
-        setError(data.message || 'Login failed. Please try again.');
+        toast.error(data.message || 'Login failed. Please try again.', {
+          style: {
+            background: '#333',
+            color: '#fff',
+          }
+        });
       }
     } catch (err) {
-      setError('Unable to connect to server. Please try again later.');
+      toast.error('Unable to connect to server. Please try again later.');
     } finally {
       setLoading(false);
     }
@@ -48,79 +69,59 @@ const Login = ({ onLogin }) => {
 
   return (
     <div className="auth-page">
-      <div className="container">
-        <div className="auth-container">
-          <div className="auth-card">
-            <div className="auth-header">
-              <h1 className="auth-title">Welcome Back</h1>
-              <p className="auth-subtitle">Login to access your farming dashboard</p>
-            </div>
-
-            {error && (
-              <div className="alert alert-danger">
-                {error}
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="auth-form">
-              <div className="form-group">
-                <label className="form-label">Phone Number</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  className="form-control"
-                  placeholder="Enter your 10-digit mobile number"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label className="form-label">Password</label>
-                <input
-                  type="password"
-                  name="password"
-                  className="form-control"
-                  placeholder="Enter your password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className="form-actions">
-                <label className="checkbox-label">
-                  <input type="checkbox" />
-                  <span>Remember me</span>
-                </label>
-                <a href="#" className="link-primary">Forgot Password?</a>
-              </div>
-
-              <button 
-                type="submit" 
-                className="btn btn-primary btn-lg w-full"
-                disabled={loading}
-              >
-                {loading ? 'Logging in...' : 'Login'}
-              </button>
-            </form>
-
-            <div className="auth-footer">
-              <p>Don't have an account? <Link to="/register" className="link-primary">Register here</Link></p>
-            </div>
+      <div className="auth-container centered">
+        <div className="auth-card">
+          <div className="auth-header">
+            <h1 className="auth-title">Welcome Back</h1>
+            <p className="auth-subtitle">Login to access your farming dashboard</p>
           </div>
 
-          <div className="auth-info">
-            <h2>🌾 KrishiMitra</h2>
-            <p>Join thousands of farmers who trust our AI-powered platform for:</p>
-            <ul>
-              <li>✅ Smart crop recommendations</li>
-              <li>✅ Real-time market prices</li>
-              <li>✅ Weather forecasts</li>
-              <li>✅ Expert agricultural advice</li>
-              <li>✅ Multilingual support</li>
-            </ul>
+          <form onSubmit={handleSubmit} className="auth-form" noValidate>
+            <div className="form-group">
+              <label className="form-label">Phone Number</label>
+              <input
+                type="tel"
+                name="phone"
+                className="form-control"
+                placeholder="Enter your 10-digit mobile number"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Password</label>
+              <input
+                type="password"
+                name="password"
+                className="form-control"
+                placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-actions">
+              <label className="checkbox-label">
+                <input type="checkbox" />
+                <span>Remember me</span>
+              </label>
+              <a href="#" className="link-primary">Forgot Password?</a>
+            </div>
+
+            <button
+              type="submit"
+              className="btn btn-primary w-full"
+              disabled={loading}
+            >
+              {loading ? 'Logging in...' : 'Login'}
+            </button>
+          </form>
+
+          <div className="auth-footer">
+            <p>Don't have an account? <Link to="/register" className="link-primary">Register here</Link></p>
           </div>
         </div>
       </div>
